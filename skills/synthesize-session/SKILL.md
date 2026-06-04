@@ -1,14 +1,19 @@
+---
+name: synthesize-session
+description: Turn a planning or development conversation into an Obsidian-ready session summary. Use when the user wants durable personal memory from a conversation without making it project source of truth.
+---
+
 # Skill: Synthesize Session
 
 ## Purpose
 
-Turn a planning or development conversation into a concise, useful handover.
+Turn a planning or development conversation into a concise, useful session summary for local Obsidian.
 
-This is a holding version of the skill. Refine it after real use.
+Obsidian is personal memory, not project source of truth. Reference project artifacts by path, issue, PR, or commit instead of duplicating them.
 
 ## Output
 
-Produce a structured summary with:
+Produce an Obsidian-ready summary with:
 
 - What was discussed
 - What was decided
@@ -16,7 +21,9 @@ Produce a structured summary with:
 - Open questions
 - Next actions
 - Repo docs or issues to create
-- Obsidian-ready summary
+- Links to relevant artifacts
+
+If an Obsidian location is known or provided, save the summary there. Otherwise, return the summary in the conversation so the user can place it.
 
 ## Rules
 

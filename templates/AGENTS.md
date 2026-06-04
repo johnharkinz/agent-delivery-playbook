@@ -27,10 +27,20 @@ Adjust these per project.
 Agents should read:
 
 1. This AGENTS.md
-2. docs/product.md
-3. docs/technical.md
-4. docs/handover.md
-5. The GitHub issue being implemented
+2. CONTEXT.md, if it exists
+3. docs/product.md
+4. docs/technical.md
+5. docs/handover.md
+6. Relevant ADRs in docs/adr/, if they exist
+7. The GitHub issue being implemented
+
+## Domain Language
+
+Use the project's canonical language from CONTEXT.md.
+
+CONTEXT.md is based on the Domain-Driven Design idea of a shared language between the product, domain, and implementation. It should define project-specific terms, preferred names, and words to avoid.
+
+When the code, issue, and CONTEXT.md disagree, call out the mismatch before implementing.
 
 ## Implementation Rules
 

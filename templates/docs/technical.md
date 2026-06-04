@@ -16,6 +16,18 @@ Describe the system shape.
 
 - ...
 
+## Domain Language
+
+This project uses CONTEXT.md to capture shared domain language.
+
+- Canonical terms:
+- Terms to avoid:
+- Open naming questions:
+
+## Architectural Decisions
+
+Record durable, meaningful decisions in docs/adr/ when the decision is hard to reverse, surprising without context, and the result of a real trade-off.
+
 ## Test Strategy
 
 - ...

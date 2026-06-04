@@ -37,10 +37,10 @@ useful project memory
 
 Start small.
 
-Do not build a large skill library upfront. Do not create a separate project-management system. Use this repo to support practical delivery, not to replace judgement.
+Keep skills and templates lightweight. Do not create a separate project-management system. Use this repo to support practical delivery, not to replace judgement.
 
 ## First Milestone
 
-The first milestone is to create the minimum reusable playbook assets, then trial them on Shareable.
+The first milestone is to create reusable playbook assets, then trial them on a brand new project.
 
-Do not expand this repo until the first real Shareable trial has been reviewed.
+Treat new skills as unproven until they have helped with real project delivery. Review and prune them after the first trial.

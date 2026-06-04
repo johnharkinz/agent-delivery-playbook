@@ -1,3 +1,8 @@
+---
+name: implement-issue
+description: Implement one GitHub issue safely using Codex or another coding agent. Use when the user wants an agent to work from a specific issue and produce a reviewable PR-style result.
+---
+
 # Skill: Implement Issue
 
 ## Purpose
