@@ -49,7 +49,7 @@ If a `DOMAIN-LANGUAGE-MAP.md` exists at the root, the repo has multiple bounded 
 │       └── docs/adr/
 ```
 
-Create files lazily — only when you have something to write. If no `DOMAIN-LANGUAGE.md` exists, create one when the first term is resolved.
+Create files lazily — only when you have something to write. If no `DOMAIN-LANGUAGE.md` exists, create one when the first term is resolved using the standard project-local domain-language shape: canonical terms, short definitions, and `_Avoid_` terms.
 
 Projects should be self-contained. When creating ADRs, use the target project's local ADR docs:
 
@@ -78,7 +78,7 @@ When the user states how something works, check whether the code agrees. If you 
 
 ### Update DOMAIN-LANGUAGE.md inline
 
-When a term is resolved, update `DOMAIN-LANGUAGE.md` right there. Don't batch these up — capture them as they happen. Use the format in [DOMAIN-LANGUAGE-FORMAT.md](./DOMAIN-LANGUAGE-FORMAT.md).
+When a term is resolved, update `DOMAIN-LANGUAGE.md` right there. Don't batch these up — capture them as they happen. Follow the format already shown in the target project's `DOMAIN-LANGUAGE.md`.
 
 `DOMAIN-LANGUAGE.md` should be totally devoid of implementation details. Do not treat `DOMAIN-LANGUAGE.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 
