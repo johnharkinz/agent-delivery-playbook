@@ -57,7 +57,14 @@ Chat history is temporary unless it is converted into one of those artifacts.
 
 ## The Standard Project Setup
 
-For a new project, start with the smallest useful documentation set.
+For a new project, start by running the init script from this playbook repo:
+
+```bash
+node /path/to/agent-delivery-playbook/scripts/init-project.js /path/to/new-project --dry-run
+node /path/to/agent-delivery-playbook/scripts/init-project.js /path/to/new-project
+```
+
+The dry run shows what would be copied, skipped, or overwritten before anything changes. The real run copies the standard project files and skills into the target project so it remains self-contained.
 
 Recommended files:
 
@@ -71,6 +78,7 @@ docs/adr/README.md
 docs/adr/0000-template.md
 .github/ISSUE_TEMPLATE/agent-slice.md
 .github/pull_request_template.md
+skills/
 ```
 
 Add `DOMAIN-LANGUAGE-MAP.md` when the project has multiple bounded contexts.

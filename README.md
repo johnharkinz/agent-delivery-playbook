@@ -203,23 +203,72 @@ Project source of truth should remain in the project repository: code, docs, iss
 
 ## Recommended New Project Setup
 
-From a future project repo, copy the templates you need from this repo. For example:
+Use the init script to copy the standard playbook files into a new project.
+
+The script is written in Node.js so it works on macOS and Windows. It copies files from this playbook repo into the target project; after that, the target project is self-contained.
+
+Requirements:
+
+- Node.js installed
+- the target project directory already exists
+- quote paths that contain spaces
+
+Run a dry run first:
 
 ```bash
-cp /path/to/agent-delivery-playbook/templates/project/AGENTS.md ./AGENTS.md
-cp /path/to/agent-delivery-playbook/templates/project/DOMAIN-LANGUAGE.md ./DOMAIN-LANGUAGE.md
-cp /path/to/agent-delivery-playbook/templates/project/DOMAIN-LANGUAGE-MAP.md ./DOMAIN-LANGUAGE-MAP.md
-mkdir -p docs docs/adr .github/ISSUE_TEMPLATE
-cp /path/to/agent-delivery-playbook/templates/docs/product.md ./docs/product.md
-cp /path/to/agent-delivery-playbook/templates/docs/technical.md ./docs/technical.md
-cp /path/to/agent-delivery-playbook/templates/docs/state.md ./docs/state.md
-cp /path/to/agent-delivery-playbook/templates/docs/adr/README.md ./docs/adr/README.md
-cp /path/to/agent-delivery-playbook/templates/docs/adr/0000-template.md ./docs/adr/0000-template.md
-cp /path/to/agent-delivery-playbook/templates/github/ISSUE_TEMPLATE/agent-slice.md ./.github/ISSUE_TEMPLATE/agent-slice.md
-cp /path/to/agent-delivery-playbook/templates/github/pull_request_template.md ./.github/pull_request_template.md
+node /path/to/agent-delivery-playbook/scripts/init-project.js /path/to/new-project --dry-run
 ```
 
-Then edit every copied file. Replace placeholders with real project information before relying on agents to use them.
+If the dry run looks right, run it for real:
+
+```bash
+node /path/to/agent-delivery-playbook/scripts/init-project.js /path/to/new-project
+```
+
+On Windows, use the same command with Windows paths:
+
+```powershell
+node C:\path\to\agent-delivery-playbook\scripts\init-project.js C:\path\to\new-project --dry-run
+node C:\path\to\agent-delivery-playbook\scripts\init-project.js C:\path\to\new-project
+```
+
+By default, the script does not overwrite existing files. Existing files are reported as `SKIP`.
+
+Dry-run output uses these labels:
+
+- `COPY`: file does not exist yet and would be copied
+- `SKIP`: file already exists and would be left alone
+- `OVERWRITE`: file already exists and would be replaced because `--force` was passed
+
+To overwrite existing files, pass `--force`:
+
+```bash
+node /path/to/agent-delivery-playbook/scripts/init-project.js /path/to/new-project --force
+```
+
+You can combine `--dry-run` and `--force` to see what would be overwritten:
+
+```bash
+node /path/to/agent-delivery-playbook/scripts/init-project.js /path/to/new-project --dry-run --force
+```
+
+The script copies:
+
+```text
+AGENTS.md
+DOMAIN-LANGUAGE.md
+DOMAIN-LANGUAGE-MAP.md
+docs/product.md
+docs/technical.md
+docs/state.md
+docs/adr/README.md
+docs/adr/0000-template.md
+.github/ISSUE_TEMPLATE/agent-slice.md
+.github/pull_request_template.md
+skills/
+```
+
+After running it, edit every copied file. Replace placeholders with real project information before relying on agents to use them.
 
 ## Suggested First Conversation For A New Project
 
