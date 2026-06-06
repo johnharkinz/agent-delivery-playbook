@@ -51,13 +51,12 @@ Project truth should live in the project repository, not in chat history.
 
 Use these files as durable context:
 
-- `CONTEXT.md`: domain glossary and canonical language
-- `CONTEXT-MAP.md`: map of multiple domain contexts, if this project has them
+- `DOMAIN-LANGUAGE.md`: domain glossary and canonical language
+- `DOMAIN-LANGUAGE-MAP.md`: map of multiple bounded contexts, if this project has them
 - `docs/product.md`: product intent, users, scope, roadmap, and open product questions
 - `docs/technical.md`: architecture, stack, modules, data flow, test strategy, deployment, constraints, and useful commands
 - `docs/state.md`: current project status, recent work, gotchas, open questions, and where the next agent should start
-- `docs/agent-workflow.md`: broader notes on how agents and humans collaborate in this project
-- `docs/adr/`: architectural decision records, when durable trade-off decisions need explanation
+- `docs/adr/`: architectural decision records, when durable trade-off decisions need explanation; use `docs/adr/0000-template.md` for new ADRs
 - GitHub issues: scoped units of implementation work
 - Pull requests: reviewable records of completed work
 
@@ -69,12 +68,11 @@ Update documentation when the work changes durable project truth.
 
 Use the smallest fitting artifact:
 
-- Domain term clarified or renamed: update `CONTEXT.md`.
+- Domain term clarified or renamed: update `DOMAIN-LANGUAGE.md`.
 - Product behavior, scope, target user, or roadmap changed: update `docs/product.md`.
 - Architecture, setup, dependency, data flow, testing, deployment, or constraint changed: update `docs/technical.md`.
 - Current project state, next steps, gotchas, or open questions changed: update `docs/state.md`.
-- Agent collaboration workflow changed: update `docs/agent-workflow.md`.
-- A decision is hard to reverse, surprising without context, and the result of a real trade-off: add or update an ADR.
+- A decision is hard to reverse, surprising without context, and the result of a real trade-off: add or update an ADR using `docs/adr/0000-template.md`.
 - New implementation work is discovered: propose or create a new issue rather than expanding the current scope silently.
 
 Do not update docs just to narrate every code change. Documentation should stay useful and durable.

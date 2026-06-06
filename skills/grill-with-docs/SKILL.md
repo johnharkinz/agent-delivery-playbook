@@ -1,6 +1,6 @@
 ---
 name: grill-with-docs
-description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
+description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (DOMAIN-LANGUAGE.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
 ---
 
 <what-to-do>
@@ -21,11 +21,11 @@ During codebase exploration, also look for existing documentation:
 
 ### File structure
 
-Most repos have a single context:
+Most repos have a single shared domain language:
 
 ```
 /
-├── CONTEXT.md
+├── DOMAIN-LANGUAGE.md
 ├── docs/
 │   └── adr/
 │       ├── 0001-event-sourced-orders.md
@@ -33,29 +33,36 @@ Most repos have a single context:
 └── src/
 ```
 
-If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The map points to where each one lives:
+If a `DOMAIN-LANGUAGE-MAP.md` exists at the root, the repo has multiple bounded contexts. The map points to where each one lives:
 
 ```
 /
-├── CONTEXT-MAP.md
+├── DOMAIN-LANGUAGE-MAP.md
 ├── docs/
 │   └── adr/                          ← system-wide decisions
 ├── src/
 │   ├── ordering/
-│   │   ├── CONTEXT.md
+│   │   ├── DOMAIN-LANGUAGE.md
 │   │   └── docs/adr/                 ← context-specific decisions
 │   └── billing/
-│       ├── CONTEXT.md
+│       ├── DOMAIN-LANGUAGE.md
 │       └── docs/adr/
 ```
 
-Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+Create files lazily — only when you have something to write. If no `DOMAIN-LANGUAGE.md` exists, create one when the first term is resolved.
+
+Projects should be self-contained. When creating ADRs, use the target project's local ADR docs:
+
+- `docs/adr/README.md`
+- `docs/adr/0000-template.md`
+
+If `docs/adr/` does not exist, create it when the first ADR is needed. Include a minimal `README.md` and `0000-template.md` in that directory if they are missing, so the project remains self-contained.
 
 ## During the session
 
 ### Challenge against the glossary
 
-When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
+When the user uses a term that conflicts with the existing language in `DOMAIN-LANGUAGE.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
 
 ### Sharpen fuzzy language
 
@@ -69,11 +76,11 @@ When domain relationships are being discussed, stress-test them with specific sc
 
 When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
 
-### Update CONTEXT.md inline
+### Update DOMAIN-LANGUAGE.md inline
 
-When a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md).
+When a term is resolved, update `DOMAIN-LANGUAGE.md` right there. Don't batch these up — capture them as they happen. Use the format in [DOMAIN-LANGUAGE-FORMAT.md](./DOMAIN-LANGUAGE-FORMAT.md).
 
-`CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
+`DOMAIN-LANGUAGE.md` should be totally devoid of implementation details. Do not treat `DOMAIN-LANGUAGE.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 
 ### Offer ADRs sparingly
 
@@ -83,6 +90,8 @@ Only offer to create an ADR when all three are true:
 2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
 3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
 
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+If any of the three is missing, skip the ADR.
+
+When creating an ADR, use the target project's `docs/adr/0000-template.md` as the template. Scan `docs/adr/` for the highest existing numbered ADR and create the next sequential file, for example `0001-postgres-for-primary-data.md`.
 
 </supporting-info>

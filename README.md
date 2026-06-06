@@ -68,8 +68,8 @@ They are starting points, not sacred documents. Edit them aggressively so they r
 
 Key template areas:
 
-- `templates/project/`: root-level project context for agents
-- `templates/docs/`: product, technical, state, and workflow docs
+- `templates/project/`: root-level project instructions and domain-language templates for agents
+- `templates/docs/`: product, technical, state, and ADR docs
 - `templates/github/`: issue and pull request templates
 - `templates/obsidian/`: personal session-summary format
 
@@ -87,17 +87,18 @@ Suggested minimum starter set:
 
 ```text
 AGENTS.md
-CONTEXT.md
-CONTEXT-MAP.md
+DOMAIN-LANGUAGE.md
+DOMAIN-LANGUAGE-MAP.md
 docs/product.md
 docs/technical.md
 docs/state.md
-docs/agent-workflow.md
+docs/adr/README.md
+docs/adr/0000-template.md
 .github/ISSUE_TEMPLATE/agent-slice.md
 .github/pull_request_template.md
 ```
 
-You do not need every file on day one. For a tiny project, start with `AGENTS.md`, `CONTEXT.md`, `docs/product.md`, `docs/technical.md`, and the GitHub issue template.
+You do not need every file on day one. For a tiny project, start with `AGENTS.md`, `DOMAIN-LANGUAGE.md`, `docs/product.md`, `docs/technical.md`, and the GitHub issue template.
 
 ### 2. Adapt `AGENTS.md`
 
@@ -115,18 +116,18 @@ Include things like:
 
 Keep `AGENTS.md` practical. It should help an agent start work safely, not document the whole project.
 
-### 3. Fill in project context
+### 3. Fill in domain language
 
-Use `CONTEXT.md` for domain language. This should be a glossary, not a specification.
+Use `DOMAIN-LANGUAGE.md` for domain language. This should be a glossary, not a specification.
 
-Good `CONTEXT.md` entries answer questions like:
+Good `DOMAIN-LANGUAGE.md` entries answer questions like:
 
 - What are the canonical terms in this project?
 - Which terms are overloaded or should be avoided?
 - What distinctions matter to the domain?
 - What names would confuse a future maintainer?
 
-Use `CONTEXT-MAP.md` only when the project has multiple meaningful contexts. For example, a larger app might have separate ordering, billing, and reporting areas. The map tells agents where to find the right local context.
+Use `DOMAIN-LANGUAGE-MAP.md` only when the project has multiple meaningful bounded contexts. For example, a larger app might have separate ordering, billing, and reporting areas. The map tells agents where to find the right local domain language.
 
 ### 4. Create lightweight product and technical docs
 
@@ -145,6 +146,8 @@ Create ADRs only when a decision is:
 - the result of a real trade-off
 
 Do not create an ADR for every implementation detail. Most decisions belong in code, tests, issues, or short docs updates. ADRs are for decisions future contributors would reasonably ask about.
+
+Use `docs/adr/0000-template.md` as the starting point for new ADRs.
 
 ### 6. Break work into agent-sized issues
 
@@ -204,13 +207,14 @@ From a future project repo, copy the templates you need from this repo. For exam
 
 ```bash
 cp /path/to/agent-delivery-playbook/templates/project/AGENTS.md ./AGENTS.md
-cp /path/to/agent-delivery-playbook/templates/project/CONTEXT.md ./CONTEXT.md
-cp /path/to/agent-delivery-playbook/templates/project/CONTEXT-MAP.md ./CONTEXT-MAP.md
-mkdir -p docs .github/ISSUE_TEMPLATE
+cp /path/to/agent-delivery-playbook/templates/project/DOMAIN-LANGUAGE.md ./DOMAIN-LANGUAGE.md
+cp /path/to/agent-delivery-playbook/templates/project/DOMAIN-LANGUAGE-MAP.md ./DOMAIN-LANGUAGE-MAP.md
+mkdir -p docs docs/adr .github/ISSUE_TEMPLATE
 cp /path/to/agent-delivery-playbook/templates/docs/product.md ./docs/product.md
 cp /path/to/agent-delivery-playbook/templates/docs/technical.md ./docs/technical.md
 cp /path/to/agent-delivery-playbook/templates/docs/state.md ./docs/state.md
-cp /path/to/agent-delivery-playbook/templates/docs/agent-workflow.md ./docs/agent-workflow.md
+cp /path/to/agent-delivery-playbook/templates/docs/adr/README.md ./docs/adr/README.md
+cp /path/to/agent-delivery-playbook/templates/docs/adr/0000-template.md ./docs/adr/0000-template.md
 cp /path/to/agent-delivery-playbook/templates/github/ISSUE_TEMPLATE/agent-slice.md ./.github/ISSUE_TEMPLATE/agent-slice.md
 cp /path/to/agent-delivery-playbook/templates/github/pull_request_template.md ./.github/pull_request_template.md
 ```
@@ -224,9 +228,9 @@ Once the starter docs exist, a useful first agent conversation is:
 ```text
 Use the grill-with-docs skill.
 
-Read AGENTS.md, CONTEXT.md, docs/product.md, and docs/technical.md.
+Read AGENTS.md, DOMAIN-LANGUAGE.md, docs/product.md, and docs/technical.md.
 Interview me one question at a time until the product scope, core domain terms,
-and first implementation milestone are clear. Update CONTEXT.md as terms are
+and first implementation milestone are clear. Update DOMAIN-LANGUAGE.md as terms are
 resolved. Suggest ADRs only for decisions that are hard to reverse, surprising
 without context, and the result of a real trade-off.
 ```

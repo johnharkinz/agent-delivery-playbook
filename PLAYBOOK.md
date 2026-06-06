@@ -48,7 +48,7 @@ Project truth should live in:
 - pull requests
 - commits
 - `AGENTS.md`
-- `CONTEXT.md`
+- `DOMAIN-LANGUAGE.md`
 - `docs/product.md`
 - `docs/technical.md`
 - ADRs where needed
@@ -63,16 +63,17 @@ Recommended files:
 
 ```text
 AGENTS.md
-CONTEXT.md
+DOMAIN-LANGUAGE.md
 docs/product.md
 docs/technical.md
 docs/state.md
-docs/agent-workflow.md
+docs/adr/README.md
+docs/adr/0000-template.md
 .github/ISSUE_TEMPLATE/agent-slice.md
 .github/pull_request_template.md
 ```
 
-Add `CONTEXT-MAP.md` when the project has multiple domain contexts.
+Add `DOMAIN-LANGUAGE-MAP.md` when the project has multiple bounded contexts.
 
 Add ADRs only when the decision deserves durable explanation.
 
@@ -94,7 +95,7 @@ Use it for project-specific working rules:
 
 Keep it operational. It should help an agent start safely.
 
-### `CONTEXT.md`
+### `DOMAIN-LANGUAGE.md`
 
 The project glossary.
 
@@ -105,13 +106,13 @@ Use it to capture shared domain language:
 - distinctions that matter
 - naming questions still open
 
-Do not turn `CONTEXT.md` into a specification. It should explain language, not implementation.
+Do not turn `DOMAIN-LANGUAGE.md` into a specification. It should explain language, not implementation.
 
-### `CONTEXT-MAP.md`
+### `DOMAIN-LANGUAGE-MAP.md`
 
-Use this only for projects with multiple contexts.
+Use this only for projects with multiple bounded contexts.
 
-For example, a product might have separate billing, ordering, and reporting areas. Each can have its own local `CONTEXT.md`; the map tells agents where to look.
+For example, a product might have separate billing, ordering, and reporting areas. Each can have its own local `DOMAIN-LANGUAGE.md`; the map tells agents where to find the right domain language.
 
 ### `docs/product.md`
 
@@ -144,12 +145,6 @@ Use this as durable project state.
 
 It should help a human or agent understand the current state of the project without reading every issue and PR.
 
-### `docs/agent-workflow.md`
-
-Use this for project-specific workflow notes that do not belong in `AGENTS.md`.
-
-`AGENTS.md` should be concise and operational. `docs/agent-workflow.md` can explain the broader collaboration pattern.
-
 ### ADRs
 
 Use ADRs sparingly.
@@ -161,6 +156,8 @@ Create an ADR only when a decision is:
 - the result of a real trade-off
 
 If the decision is obvious, local, or easy to change, prefer code, tests, issue notes, or a short docs update.
+
+Use `docs/adr/0000-template.md` as the starting point for new ADRs. Keep the template in place and create numbered ADRs such as `0001-postgres-for-primary-data.md`.
 
 ## Skill Roles
 
@@ -181,7 +178,7 @@ Good for:
 
 Use when a plan needs to be tested against an existing project.
 
-The agent reads project docs, checks terminology, compares claims with code where possible, and updates `CONTEXT.md` as language gets resolved.
+The agent reads project docs, checks terminology, compares claims with code where possible, and updates `DOMAIN-LANGUAGE.md` as language gets resolved.
 
 Good for:
 
@@ -278,7 +275,7 @@ Do not rush to implementation while the nouns are still unstable.
 
 ### 2. Capture durable context
 
-When terms are clarified, update `CONTEXT.md`.
+When terms are clarified, update `DOMAIN-LANGUAGE.md`.
 
 When product scope is clarified, update `docs/product.md`.
 
@@ -410,7 +407,7 @@ Do not update docs just to narrate every code change.
 
 Use the smallest durable artifact that fits:
 
-- term clarified: `CONTEXT.md`
+- term clarified: `DOMAIN-LANGUAGE.md`
 - product scope changed: `docs/product.md`
 - system shape changed: `docs/technical.md`
 - project status changed: `docs/state.md`
@@ -425,9 +422,9 @@ Use the smallest durable artifact that fits:
 ```text
 Use the grill-with-docs skill.
 
-Read AGENTS.md, CONTEXT.md, docs/product.md, and docs/technical.md.
+Read AGENTS.md, DOMAIN-LANGUAGE.md, docs/product.md, and docs/technical.md.
 Interview me one question at a time until the scope and domain language are clear.
-Update CONTEXT.md as terms are resolved.
+Update DOMAIN-LANGUAGE.md as terms are resolved.
 Suggest ADRs only for durable trade-off decisions.
 ```
 

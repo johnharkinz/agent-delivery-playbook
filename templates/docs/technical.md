@@ -18,7 +18,7 @@ Describe the system shape.
 
 ## Domain Language
 
-This project uses CONTEXT.md to capture shared domain language.
+This project uses DOMAIN-LANGUAGE.md to capture shared domain language.
 
 - Canonical terms:
 - Terms to avoid:
