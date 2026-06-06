@@ -210,8 +210,9 @@ The script is written in Node.js so it works on macOS and Windows. It copies fil
 Requirements:
 
 - Node.js installed
-- the target project directory already exists
 - quote paths that contain spaces
+
+The target project directory may already exist. If it does not exist, the script asks before creating it. In `--dry-run` mode, it reports `CREATE_DIR` and does not create anything.
 
 Run a dry run first:
 
@@ -236,6 +237,7 @@ By default, the script does not overwrite existing files. Existing files are rep
 
 Dry-run output uses these labels:
 
+- `CREATE_DIR`: target project directory does not exist and would be created
 - `COPY`: file does not exist yet and would be copied
 - `SKIP`: file already exists and would be left alone
 - `OVERWRITE`: file already exists and would be replaced because `--force` was passed

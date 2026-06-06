@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const readline = require("readline");
 
 const repoRoot = path.resolve(__dirname, "..");
 
@@ -136,13 +137,55 @@ function formatRelative(filePath, root) {
   return path.relative(root, filePath).split(path.sep).join("/");
 }
 
-function main() {
+function askConfirmation(question) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return new Promise((resolve) => {
+    rl.question(`${question} [y/N] `, (answer) => {
+      rl.close();
+      resolve(answer.trim().toLowerCase() === "y" || answer.trim().toLowerCase() === "yes");
+    });
+  });
+}
+
+async function ensureTargetDirectory(targetRoot, options) {
+  if (isDirectory(targetRoot)) {
+    return { created: false };
+  }
+
+  if (exists(targetRoot)) {
+    throw new Error(`Target path exists but is not a directory: ${targetRoot}`);
+  }
+
+  if (options.dryRun) {
+    return { created: true, dryRun: true };
+  }
+
+  if (!process.stdin.isTTY) {
+    throw new Error(
+      `Target project does not exist: ${targetRoot}. Re-run in an interactive terminal to approve creating it.`
+    );
+  }
+
+  const approved = await askConfirmation(
+    `Target project does not exist. Create this directory?\n${targetRoot}`
+  );
+
+  if (!approved) {
+    throw new Error("Target directory creation was not approved.");
+  }
+
+  fs.mkdirSync(targetRoot, { recursive: true });
+  return { created: true, dryRun: false };
+}
+
+async function main() {
   const options = parseArgs(process.argv);
   const targetRoot = path.resolve(options.target);
-
-  if (!isDirectory(targetRoot)) {
-    throw new Error(`Target project does not exist or is not a directory: ${targetRoot}`);
-  }
+  const targetDirectory = await ensureTargetDirectory(targetRoot, options);
 
   const results = [];
 
@@ -181,6 +224,11 @@ function main() {
   console.log(`${mode} for ${targetRoot}`);
   console.log("");
 
+  if (targetDirectory.created) {
+    const label = options.dryRun ? "CREATE_DIR" : "CREATED";
+    console.log(`${label.padEnd(9)} .`);
+  }
+
   for (const result of results) {
     const destination = formatRelative(result.destination, targetRoot);
     const label = result.action.toUpperCase().padEnd(9);
@@ -198,9 +246,11 @@ function main() {
 }
 
 try {
-  main();
+  main().catch((error) => {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  });
 } catch (error) {
   console.error(`Error: ${error.message}`);
   process.exit(1);
 }
-
