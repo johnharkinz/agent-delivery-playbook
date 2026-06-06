@@ -23,7 +23,7 @@ const entries = [
     "templates/github/pull_request_template.md",
     ".github/pull_request_template.md",
   ],
-  ["skills", "skills"],
+  ["skills", ".agents/skills"],
 ];
 
 function printUsage() {

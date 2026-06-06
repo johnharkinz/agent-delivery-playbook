@@ -78,8 +78,10 @@ docs/adr/README.md
 docs/adr/0000-template.md
 .github/ISSUE_TEMPLATE/agent-slice.md
 .github/pull_request_template.md
-skills/
+.agents/skills/
 ```
+
+Codex discovers repo-local skills from `.agents/skills/`, so copied skills live there in new projects.
 
 Add `DOMAIN-LANGUAGE-MAP.md` when the project has multiple bounded contexts.
 

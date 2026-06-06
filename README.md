@@ -267,8 +267,10 @@ docs/adr/README.md
 docs/adr/0000-template.md
 .github/ISSUE_TEMPLATE/agent-slice.md
 .github/pull_request_template.md
-skills/
+.agents/skills/
 ```
+
+Codex discovers repo-local skills from `.agents/skills/`, so the copied skills are available to Codex inside the new project.
 
 After running it, edit every copied file. Replace placeholders with real project information before relying on agents to use them.
 

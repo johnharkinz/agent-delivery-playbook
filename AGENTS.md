@@ -18,7 +18,7 @@ In particular, check the script when changing:
 - `templates/docs/`
 - `templates/github/`
 - `skills/`
-- any documented new-project destination path, such as `AGENTS.md`, `DOMAIN-LANGUAGE.md`, `docs/state.md`, `.github/pull_request_template.md`, or `skills/`
+- any documented new-project destination path, such as `AGENTS.md`, `DOMAIN-LANGUAGE.md`, `docs/state.md`, `.github/pull_request_template.md`, or `.agents/skills/`
 
 The script's `entries` list is the source of what gets copied into a new project. Keep it aligned with the README, PLAYBOOK, and actual template tree.
 
@@ -58,4 +58,3 @@ Use a temporary directory outside this repo for script tests.
 - Keep skills focused on agent behavior.
 - Keep durable project document formats visible in templates.
 - Do not add process that does not help future project delivery.
-
