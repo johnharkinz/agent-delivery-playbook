@@ -31,7 +31,7 @@
 ## Where Agents Should Start
 
 1. Read AGENTS.md.
-2. Read CONTEXT.md, if it exists.
+2. Read DOMAIN-LANGUAGE.md, if it exists.
 3. Read docs/product.md.
 4. Read docs/technical.md.
 5. Read docs/state.md.
