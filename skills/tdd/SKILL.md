@@ -49,6 +49,8 @@ When exploring the codebase, use the project's domain glossary so that test name
 Before writing any code, make the plan explicit. Confirm with the user when the issue is unclear, when the work changes public interfaces, or when the slice is marked HITL.
 
 - [ ] Identify interface changes needed
+- [ ] Identify whether any interface, boundary, dependency, or test-seam decision may be ADR-worthy
+- [ ] Identify which durable docs may need reconciliation after the slice: `docs/product.md`, `docs/technical.md`, `docs/state.md`, and `docs/adr/`
 - [ ] Identify which behaviors to test and prioritize
 - [ ] Identify opportunities for [deep modules](deep-modules.md) (small interface, deep implementation)
 - [ ] Design interfaces for [testability](interface-design.md)
@@ -56,6 +58,8 @@ Before writing any code, make the plan explicit. Confirm with the user when the 
 - [ ] Get user approval on the plan when the work is ambiguous, public-interface changing, or HITL
 
 If needed, ask: "What should the public interface look like? Which behaviors are most important to test?"
+
+If the plan introduces a durable interface, boundary, external dependency, storage model, deployment assumption, or testing seam that is hard to reverse, surprising without context, and the result of a real trade-off, flag it as an ADR candidate before implementation. If the decision is unresolved, treat the slice as HITL and ask the user.
 
 **You can't test everything.** Focus testing effort on critical paths and complex logic, not every possible edge case. If priorities are unclear, ask the user which behaviors matter most.
 
@@ -96,7 +100,11 @@ After all tests pass, look for [refactor candidates](refactoring.md):
 - [ ] Consider what new code reveals about existing code
 - [ ] Run tests after each refactor step
 
+During refactor, watch for architecture becoming real. If a refactor creates or changes a public interface, module boundary, dependency inversion, persistence boundary, external integration boundary, or testing strategy, perform an ADR check before finishing.
+
 **Never refactor while RED.** Get to GREEN first.
+
+When TDD is used to implement an issue or phase slice, do not stop at green tests. Reconcile durable docs before finishing. `docs/state.md` captures current status and next-agent notes, but `docs/product.md` and `docs/technical.md` must also reflect completed capabilities, architecture, constraints, commands, and deployment when those changed.
 
 ## Checklist Per Cycle
 
@@ -107,3 +115,12 @@ After all tests pass, look for [refactor candidates](refactoring.md):
 [ ] Code is minimal for this test
 [ ] No speculative features added
 ```
+
+## Completion Checklist
+
+- [ ] All tests pass
+- [ ] Standard project check command run where available
+- [ ] Refactor completed only while GREEN
+- [ ] Docs updated if behavior, setup, deployment, or architecture changed
+- [ ] Docs reconciliation completed: product, technical, state, and ADR docs either still match the completed behavior or were updated
+- [ ] ADR check completed: either no decision met the ADR bar, or an ADR was added or updated

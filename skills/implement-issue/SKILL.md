@@ -25,11 +25,16 @@ Use behaviour-focused tests where practical. Run the standard project check comm
 
 Update docs only if behaviour, setup, deployment, or architecture changes.
 
+Before finishing, reconcile durable docs. `docs/state.md` captures current status and next-agent notes, but it is not a substitute for product and technical truth. Check whether `docs/product.md`, `docs/technical.md`, `docs/state.md`, and `docs/adr/` still match the completed behavior, architecture, constraints, commands, deployment, and decisions; update the smallest fitting files when they do not.
+
+Before finishing, perform an ADR check: if the work introduced a decision that is hard to reverse, surprising without context, and the result of a real trade-off, add or update an ADR under `docs/adr/` using the project template. If no decision meets the bar, say that explicitly in the final summary.
+
 Return a PR-style summary with:
 
 - Summary
 - Tests
 - Docs
+- ADRs
 - Follow-ups
 
 ## Rules
@@ -51,5 +56,7 @@ Return a PR-style summary with:
 - Relevant tests added or updated where practical.
 - Standard check command run where available.
 - Docs updated only if needed.
+- Docs reconciliation completed: product, technical, state, and ADR docs either still match the completed work or were updated.
+- ADR check completed: either no decision met the ADR bar, or an ADR was added or updated.
 - PR-style summary produced.
 - Follow-ups called out rather than silently added.

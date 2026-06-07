@@ -24,6 +24,10 @@ Break the plan into **tracer bullet** issues. Each issue is a thin vertical slic
 
 Slices may be 'HITL' or 'AFK'. HITL slices require human interaction, such as an architectural decision or a design review. AFK slices can be implemented and merged without human interaction. Prefer AFK over HITL where possible.
 
+If a slice depends on an unresolved architectural or product-technical decision, mark it as HITL and name the decision. If a decision already appears settled and meets the ADR bar, include an acceptance criterion to add or update the ADR.
+
+For a multi-issue phase, include a final docs reconciliation slice or acceptance criterion unless the phase is purely internal and cannot change durable project truth. That reconciliation should check `docs/product.md`, `docs/technical.md`, `docs/state.md`, and `docs/adr/` against the completed phase.
+
 <vertical-slice-rules>
 - Each slice delivers a narrow but COMPLETE path through every layer (schema, API, UI, tests)
 - A completed slice is demoable or verifiable on its own
@@ -70,6 +74,8 @@ Avoid specific file paths or code snippets — they go stale fast. Exception: if
 - [ ] Criterion 1
 - [ ] Criterion 2
 - [ ] Criterion 3
+- [ ] ADR check completed for any durable trade-off introduced by this slice
+- [ ] Docs reconciliation completed if this slice closes a phase or changes product, technical, state, or ADR truth
 
 ## Blocked by
 
